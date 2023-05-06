@@ -6,7 +6,7 @@ This project is an example of integrating OpenAI's GPT-3 language model into a w
 
 You can see a live demo of the project here:
 - Backend: https://gpt-1260.onrender.com/
-- Frontend: https://gpt-1260.vercel.app/ OR gpt-1260-git-main-virus1260.vercel.app OR gpt-1260-jadu7vixm-virus1260.vercel.app
+- Frontend: https://gpt-1260.vercel.app/ OR [gpt-1260-git-main-virus1260.vercel.app](https://gpt-1260-git-main-virus1260.vercel.app/) OR [gpt-1260-jadu7vixm-virus1260.vercel.app](https://gpt-1260-jadu7vixm-virus1260.vercel.app/)
 
 ## Installation
 
