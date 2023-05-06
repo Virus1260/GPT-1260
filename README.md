@@ -1,53 +1,51 @@
 # GPT-1260
 
-GPT-1260 is an AI model developed by OpenAI that can generate human-like text. This repository contains a Node.js server that demonstrates how to integrate GPT-1260 into your applications.
+This project is an example of integrating OpenAI's GPT-3 language model into a web application. The application takes a user prompt and generates a text completion using the GPT-3 model. 
 
-## Prerequisites
+## Demo
 
-Before you begin, ensure you have met the following requirements:
+You can see a live demo of the project here:
+- Backend: https://gpt-1260.onrender.com/
+- Frontend: https://gpt-1260.vercel.app/
 
-- You have Node.js installed on your local machine.
-- You have an OpenAI API key.
+## Installation
 
-## Getting Started
+To install and run the project locally, follow these steps:
 
-To get started, follow these steps:
+1. Clone the repository:
+git clone https://github.com/{YOUR_USERNAME}/gpt-1260.git
 
-1. Clone this repository to your local machine.
-2. Install the dependencies using `npm install`.
-3. Create a file called `.env` in the root directory of the project and add your OpenAI API key in the following format: `OPENAI_API_KEY=<your API key>`.
-4. Start the server using `npm start`.
+
+
+2. Install dependencies:
+cd gpt-1260
+npm install
+
+
+
+3. Start the backend server:
+npm run dev
+
+
+
+4. In a separate terminal window, start the frontend server:
+cd client
+npm start
+
+
+
+5. Open your web browser and navigate to `http://localhost:3000` to see the application running.
+
+## Configuration
+
+To configure the project, you'll need to provide your OpenAI API key. You can do this by creating a `.env` file in the root directory of the project with the following content:
+OPENAI_API_KEY=your_api_key_here
+
 
 ## Usage
 
-To generate text using GPT-1260, send a POST request to the server with the following JSON body:
-
-{
-"prompt": "<your prompt>"
-}
-
-
-
-The server will respond with the generated text.
-
-## Example
-
-Here is an example of how to generate text using GPT-1260:
-
-1. Send a POST request to `http://localhost:5000/` with the following JSON body:
-
-{
-"prompt": "Once upon a time,"
-}
-
-
-2. The server will respond with the generated text:
-
-{
-"bot": "there was a magical kingdom where unicorns and dragons roamed free. The kingdom was ruled by a wise and just queen who was loved by all her subjects."
-}
-
+To use the application, enter a prompt into the input field and click the "Generate Text" button. The generated text will appear below the input field.
 
 ## License
 
-This project is licensed under the terms of the MIT license.
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) f
