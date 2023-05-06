@@ -1,49 +1,53 @@
-GPT-1260
-This is a simple API server that uses OpenAI's GPT-3.5 model to generate text completions based on user input. It exposes a REST API endpoint that accepts a prompt string and returns a generated text completion based on that prompt.
+# GPT-1260
 
-Getting Started
-Clone this repository to your local machine.
-Install dependencies: npm install
-Set your OpenAI API key as an environment variable:
-arduino
-Copy code
-export OPENAI_API_KEY=<your_api_key>
-Note: You can obtain an API key by signing up for OpenAI's GPT-3 beta program.
-Start the server: npm start
-Usage
-API Endpoint
-The server exposes a single endpoint:
+GPT-1260 is an AI model developed by OpenAI that can generate human-like text. This repository contains a Node.js server that demonstrates how to integrate GPT-1260 into your applications.
 
-bash
-Copy code
-POST /api/generate
-Request
-The request body must include a prompt property, which is the text prompt used to generate the text completion.
+## Prerequisites
 
-Example request:
+Before you begin, ensure you have met the following requirements:
 
-json
-Copy code
+- You have Node.js installed on your local machine.
+- You have an OpenAI API key.
+
+## Getting Started
+
+To get started, follow these steps:
+
+1. Clone this repository to your local machine.
+2. Install the dependencies using `npm install`.
+3. Create a file called `.env` in the root directory of the project and add your OpenAI API key in the following format: `OPENAI_API_KEY=<your API key>`.
+4. Start the server using `npm start`.
+
+## Usage
+
+To generate text using GPT-1260, send a POST request to the server with the following JSON body:
+
 {
-  "prompt": "Once upon a time, there was a "
+"prompt": "<your prompt>"
 }
-Response
-The response body will include a text property, which is the generated text completion.
 
-Example response:
 
-json
-Copy code
+
+The server will respond with the generated text.
+
+## Example
+
+Here is an example of how to generate text using GPT-1260:
+
+1. Send a POST request to `http://localhost:5000/` with the following JSON body:
+
 {
-  "text": "Once upon a time, there was a young girl named Alice. She lived in a small village in the forest and loved to play with her friends in the meadow. One day, while she was exploring the woods, she stumbled upon a magical portal that transported her to a far-off land full of adventure and wonder."
+"prompt": "Once upon a time,"
 }
-Configuration
-The following environment variables can be set to configure the server:
 
-PORT: The port on which the server will listen. Defaults to 5000.
-OPENAI_API_KEY: Your OpenAI API key. This is required to use the GPT-3.5 model.
-License
-This project is licensed under the MIT License. See the LICENSE file for details.
 
-Acknowledgements
-This project uses the OpenAI API to generate text completions.
+2. The server will respond with the generated text:
+
+{
+"bot": "there was a magical kingdom where unicorns and dragons roamed free. The kingdom was ruled by a wise and just queen who was loved by all her subjects."
+}
+
+
+## License
+
+This project is licensed under the terms of the MIT license.
