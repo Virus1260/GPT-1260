@@ -46,6 +46,9 @@ OPENAI_API_KEY=your_api_key_here
 
 To use the application, enter a prompt into the input field and click the "Generate Text" button. The generated text will appear below the input field.
 
+[![Video Title](./preview/thumbnail.png)](./preview/preview.mp4)
+
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) f
