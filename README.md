@@ -46,7 +46,7 @@ OPENAI_API_KEY=your_api_key_here
 
 To use the application, enter a prompt into the input field and click the "Generate Text" button. The generated text will appear below the input field.
 
-[![Preview Recording Of GPT-1260 Working]](https://virus1260.github.io/GPT-1260/preview/preview.mp4)
+[![Preview Recording Of GPT-1260 Working](https://virus1260.github.io/GPT-1260/preview/thumbnail.png)](https://virus1260.github.io/GPT-1260/preview/preview.mp4)
 
 
 ## License
