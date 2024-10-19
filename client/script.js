@@ -103,29 +103,36 @@ const handleSubmit = async (e) => {
     // messageDiv.innerHTML = "..."
     loader(messageDiv)
 
-    const response = await fetch('https://gpt-1260.onrender.com', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            prompt: data.get('prompt')
+    try {
+        const response = await fetch('http://localhost:5000/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                prompt: data.get('prompt')
+            })
         })
-    })
 
-    clearInterval(loadInterval)
-    messageDiv.innerHTML = " "
+        clearInterval(loadInterval)
+        messageDiv.innerHTML = " "
 
-    if (response.ok) {
-        const data = await response.json();
-        const parsedData = data.bot.trim() // trims any trailing spaces/'\n' 
+        if (response.ok) {
+            const data = await response.json();
+            const parsedData = data.bot.trim() // trims any trailing spaces/'\n' 
 
-        typeText(messageDiv, parsedData)
-    } else {
-        const err = await response.text()
-
-        messageDiv.innerHTML = "Something went wrong"
-        alert(err)
+            typeText(messageDiv, parsedData)
+        } else if (response.status === 404) {
+            messageDiv.innerHTML = "Server not found (404)"
+        } else {
+            const err = await response.json();
+            messageDiv.innerHTML = `Error: ${err.message}`
+            console.error("Error:", err)
+        }
+    } catch (error) {
+        clearInterval(loadInterval)
+        messageDiv.innerHTML = "Failed to connect to server"
+        console.error("Error:", error)
     }
 }
 

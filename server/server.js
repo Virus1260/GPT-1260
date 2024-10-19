@@ -1,49 +1,67 @@
-import express from 'express'
-import * as dotenv from 'dotenv'
-import cors from 'cors'
-import { Configuration, OpenAIApi } from 'openai'
+import express from 'express';
+import dotenv from 'dotenv';
+import cors from 'cors';
+import OpenAI from 'openai';
 
+dotenv.config();
 
-dotenv.config()
-
-const configuration = new Configuration({
+const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
 
-const openai = new OpenAIApi(configuration);
-
-const app = express()
-app.use(cors())
-app.use(express.json())
+const app = express();
+app.use(cors());
+app.use(express.json());
 
 app.get('/', async (req, res) => {
     res.status(200).send({
         message: 'Hello from GPT-1260!'
-    })
-})
+    });
+});
 
-app.post('/', async (req, res) => {
+app.post('/', async (req, res, next) => {
     try {
         const prompt = req.body.prompt;
 
-        const response = await openai.createCompletion({
-            model: "text-davinci-003",
+        const response = await openai.completions.create({
+            model: "gpt-3.5-turbo",
             prompt: `${prompt}`,
-            temperature: 0.1, // Higher values means the model will take more risks.
-            max_tokens: 3000, // The maximum number of tokens to generate in the completion. Most models have a context length of 2048 tokens (except for the newest models, which support 4096).
-            top_p: 1, // alternative to sampling with temperature, called nucleus sampling
-            frequency_penalty: 0.5, // Number between -2.0 and 2.0. Positive values penalize new tokens based on their existing frequency in the text so far, decreasing the model's likelihood to repeat the same line verbatim.
-            presence_penalty: 0, // Number between -2.0 and 2.0. Positive values penalize new tokens based on whether they appear in the text so far, increasing the model's likelihood to talk about new topics.
+            temperature: 0.1,
+            max_tokens: 3000,
+            top_p: 1,
+            frequency_penalty: 0.5,
+            presence_penalty: 0,
         });
 
         res.status(200).send({
-            bot: response.data.choices[0].text
+            bot: response.choices[0].text
         });
 
     } catch (error) {
-        console.error(error)
-        res.status(500).send(error || 'Something went wrong');
+        next(error); // Pass the error to the error-handling middleware
     }
-})
+});
 
-app.listen(5000, () => console.log('AI server started on http://localhost:5000'))
+// Error-handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send({
+        error: 'Something went wrong!',
+        message: err.message
+    });
+});
+
+// Global error handler for unhandled promise rejections and uncaught exceptions
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+    // Application specific logging, throwing an error, or other logic here
+});
+
+process.on('uncaughtException', (err) => {
+    console.error('Uncaught Exception thrown:', err);
+    // Application specific logging, throwing an error, or other logic here
+    process.exit(1); // Exit the process to avoid unknown state
+});
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`AI server started on http://localhost:${PORT}`));
